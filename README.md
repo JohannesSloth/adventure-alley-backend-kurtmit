@@ -3,20 +3,12 @@
 ### Gruppemedlemmer:
 - Frederik Tranders Christensen
 - Mikkel Hyttel Waltz
-- Niklas Faurholt Jürgensen
+- Niklas Faurholt
 - Johannes Fauerskov Sloth
 
 
 
 ### Gruppekontrakt
 
-![alt text](https://github.com/JohannesSloth/adventure-alley-backend-kurtmit/blob/main/src/main/resources/images/image.jpg?raw=true)
-
-  
-  Add this JSON with the login request:
-  ```
-  {
-  "username" : "user1",
-  "password" : "test12"
-  }
-  ```
+![alt text](https://github.com/JohannesSloth/adventure-alley-backend-kurtmit/blob/main/src/main/resources/images/gruppekontrakt-del1.png?raw=true)
+![alt text](https://github.com/JohannesSloth/adventure-alley-backend-kurtmit/blob/main/src/main/resources/images/gruppekontrakt-del2.png?raw=true)
