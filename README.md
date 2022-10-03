@@ -12,3 +12,9 @@
 
 ![alt text](https://github.com/JohannesSloth/adventure-alley-backend-kurtmit/blob/main/src/main/resources/images/gruppekontrakt-del1.png?raw=true)
 ![alt text](https://github.com/JohannesSloth/adventure-alley-backend-kurtmit/blob/main/src/main/resources/images/gruppekontrakt-del2.png?raw=true)
+
+
+<p align="center">
+  <img src="https://github.com/JohannesSloth/adventure-alley-backend-kurtmit/blob/main/src/main/resources/images/gruppekontrakt-del1.png?raw=true" alt="alt text">
+  <img src="https://github.com/JohannesSloth/adventure-alley-backend-kurtmit/blob/main/src/main/resources/images/gruppekontrakt-del2.png?raw=true" alt="alt text">
+</p>
