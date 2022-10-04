@@ -1,2 +1,0 @@
-API (Controller) classes go here
-Test-tekst

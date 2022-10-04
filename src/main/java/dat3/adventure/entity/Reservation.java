@@ -1,26 +1,51 @@
 package dat3.adventure.entity;
 
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
+
 
 @Entity
 public class Reservation {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int reservationsId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  int reservationsId;
 
-    LocalDate aktivitetsTid;
+  int numberOfParticipants;
 
-    @CreationTimestamp
-    LocalDateTime created;
+  @Column(length= 50, nullable = false)
+  String date;
 
-    @UpdateTimestamp
-    LocalDateTime edited;
+  @Column(length= 50, nullable = false)
+  String time;
+
+  @CreationTimestamp
+  LocalDateTime created;
+
+  @UpdateTimestamp
+  LocalDateTime edited;
+
+  @OneToMany(mappedBy = "reservations", cascade = CascadeType.ALL)
+  List<Activity> activities = new ArrayList<>();
+
+  String customerId;
+
+  public void addActivity(Activity act){
+    activities.add(act);
+    //activities.setActivity(this);
+  }
+
 }
