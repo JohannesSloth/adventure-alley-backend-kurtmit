@@ -31,7 +31,7 @@ public class ReservationResponse {
     String customerId;
     List<ActivityResponse> activities = new ArrayList<>();
 
-    // Convert Reservation Entity to Activity DTO
+    // Convert Reservation Entity to Reservation DTO
     public ReservationResponse(Reservation r, boolean includeAll){
         for (int i = 0; i < r.getActivities().size(); i++) {
             ActivityResponse act = new ActivityResponse(r.getActivities().get(i));
