@@ -1,6 +1,7 @@
 package dat3.adventure.entity;
 
 import lombok.*;
+import net.bytebuddy.implementation.bind.annotation.Super;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -22,7 +23,7 @@ import java.util.List;
 public class Reservation {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  int reservationsId;
+  int reservationId;
 
   int numberOfParticipants;
 
@@ -48,4 +49,13 @@ public class Reservation {
     //activities.setActivity(this);
   }
 
+  public Reservation(int reservationId, int numberOfParticipants, String date, String time, LocalDateTime created, LocalDateTime edited, String customerId) {
+    this.reservationId = reservationId;
+    this.numberOfParticipants = numberOfParticipants;
+    this.date = date;
+    this.time = time;
+    this.created = created;
+    this.edited = edited;
+    this.customerId = customerId;
+  }
 }
