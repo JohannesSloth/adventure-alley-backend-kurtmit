@@ -37,4 +37,11 @@ public class ActivityService {
 
         return new ActivityResponse(newActivity);
     }
+
+    public void editActivity(ActivityRequest body, String name) {
+    }
+
+    public ActivityResponse getActivityByName(String activityName) {
+        return new ActivityResponse(activityRepository.findById(activityName).get());
+    }
 }

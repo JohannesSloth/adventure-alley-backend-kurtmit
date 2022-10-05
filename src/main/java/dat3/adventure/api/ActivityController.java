@@ -3,6 +3,8 @@ package dat3.adventure.api;
 import dat3.adventure.dto.ActivityRequest;
 import dat3.adventure.dto.ActivityResponse;
 import dat3.adventure.service.ActivityService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,5 +27,10 @@ public class ActivityController {
     @PostMapping
     public ActivityResponse addActivity(@RequestBody ActivityRequest body){
         return activityService.addActivity(body);
+    }
+    @PutMapping
+    public ResponseEntity<Boolean> editActivity(@RequestBody ActivityRequest body, @PathVariable String name) {
+        activityService.editActivity(body, name);
+        return new ResponseEntity<>(true, HttpStatus.OK);
     }
 }

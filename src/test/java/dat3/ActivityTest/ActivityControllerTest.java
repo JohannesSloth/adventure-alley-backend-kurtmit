@@ -1,5 +1,6 @@
 package dat3.ActivityTest;
 
+import dat3.adventure.dto.ActivityRequest;
 import dat3.adventure.dto.ActivityResponse;
 import dat3.adventure.entity.Activity;
 import dat3.adventure.repository.ActivityRepository;
@@ -33,6 +34,15 @@ public class ActivityControllerTest {
 
     @Test
     void checkForActivity() {
-        assertEquals(3, activityService.getActivities().size());
+        assertEquals(2, activityService.getActivities().size());
+    }
+
+    @Test
+    void editActivityTest() {
+
+        assertEquals(15, activityService.getActivityByName("Gokart").getMinimumAge());
+        assertEquals(140, activityService.getActivityByName("Gokart").getMinimumHeight());
+        assertEquals(450, activityService.getActivityByName("Gokart").getPricePerHour());
+
     }
 }
