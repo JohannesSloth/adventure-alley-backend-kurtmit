@@ -49,7 +49,7 @@ public class Reservation {
     //activities.setActivity(this);
   }
 
-  public Reservation(int reservationId, int numberOfParticipants, String date, String time, LocalDateTime created, LocalDateTime edited, String customerId) {
+  public Reservation(int reservationId, int numberOfParticipants, String date, String time, LocalDateTime created, LocalDateTime edited, int customerId) {
     this.reservationId = reservationId;
     this.numberOfParticipants = numberOfParticipants;
     this.date = date;

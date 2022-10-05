@@ -30,7 +30,7 @@ public class ReservationRequest {
     @UpdateTimestamp
     LocalDateTime edited;
 
-    String customerId;
+    int customerId;
 
     public static Reservation getReservationEntity(ReservationRequest rrq) {
         return new Reservation(rrq.getReservationId(), rrq.getNumberOfParticipants(), rrq.getDate(), rrq.getTime(), rrq.getCreated(), rrq.getEdited(), rrq.getCustomerId());
