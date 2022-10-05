@@ -25,6 +25,13 @@ public class EmployeeRequest {
         this.role = e.getRole();
         this.username = e.getUsername();
         this.password = e.getPassword();
+    }
 
+    public EmployeeRequest(int employeeId, String employeeName, String role, String username, String password) {
+        this.employeeId = employeeId;
+        this.employeeName = employeeName;
+        this.role = role;
+        this.username = username;
+        this.password = password;
     }
 }

@@ -33,10 +33,10 @@ public class ReservationResponse {
 
     // Convert Reservation Entity to Reservation DTO
     public ReservationResponse(Reservation r, boolean includeAll){
-        for (int i = 0; i < r.getActivities().size(); i++) {
-            ActivityResponse act = new ActivityResponse(r.getActivities().get(i));
-            activities.add(act);
-        }
+     //   for (int i = 0; i < r.getActivities().size(); i++) {
+      //      ActivityResponse act = new ActivityResponse(r.getActivities().get(i));
+       //     activities.add(act);
+        //}
         this.reservationId = r.getReservationId();
         this.numberOfParticipants = r.getNumberOfParticipants();
         this.date = r.getDate();
