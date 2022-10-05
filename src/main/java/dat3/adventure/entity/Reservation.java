@@ -38,14 +38,14 @@ public class Reservation {
   @UpdateTimestamp
   LocalDateTime edited;
 
-  @OneToMany(mappedBy = "reservations", cascade = CascadeType.ALL)
-  List<Activity> activities = new ArrayList<>();
+  //@OneToMany(mappedBy = "reservations", cascade = CascadeType.ALL)
+  //List<Activity> activities = new ArrayList<>();
 
   int customerId;
 
-  public void addActivity(Activity act){
-    activities.add(act);
+  //public void addActivity(Activity act){
+    //activities.add(act);
     //activities.setActivity(this);
-  }
+  //}
 
 }
