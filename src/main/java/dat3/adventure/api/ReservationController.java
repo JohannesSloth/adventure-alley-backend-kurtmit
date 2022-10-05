@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ReservationController {
     ReservationService reservationService;
 
-    public ReservationController(ReservationService reservationService){
+    public ReservationController(ReservationService reservationService) {
         this.reservationService = reservationService;
     }
-
-
-
 }

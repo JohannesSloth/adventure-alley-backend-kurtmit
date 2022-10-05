@@ -41,7 +41,7 @@ public class Reservation {
   @OneToMany(mappedBy = "reservations", cascade = CascadeType.ALL)
   List<Activity> activities = new ArrayList<>();
 
-  String customerId;
+  int customerId;
 
   public void addActivity(Activity act){
     activities.add(act);
