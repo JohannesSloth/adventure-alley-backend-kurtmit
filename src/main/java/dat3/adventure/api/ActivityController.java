@@ -19,11 +19,11 @@ public class ActivityController {
 
     @GetMapping
     public List<ActivityResponse> getActivities(){
-        return activityService.getActivities;
+        return activityService.getActivities();
     }
 
     @PostMapping
     public ActivityResponse addActivity(@RequestBody ActivityRequest body){
-        return activityService.addActivity;
+        return activityService.addActivity(body);
     }
 }
