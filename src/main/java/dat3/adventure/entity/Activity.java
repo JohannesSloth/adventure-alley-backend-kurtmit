@@ -42,4 +42,10 @@ public class Activity {
         //equipment.setEquipment(this);
     }
 
+    public Activity(String activityName, int minimumAge, int minimumHeight, double pricePerHour) {
+        this.activityName = activityName;
+        this.minimumAge = minimumAge;
+        this.minimumHeight = minimumHeight;
+        this.pricePerHour = pricePerHour;
+    }
 }

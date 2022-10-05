@@ -32,7 +32,4 @@ public class Customer {
 
   @Column(length= 50)
   String cvrNumber;
-
-
-
 }
