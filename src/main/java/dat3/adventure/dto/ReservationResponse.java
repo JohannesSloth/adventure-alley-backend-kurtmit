@@ -31,6 +31,14 @@ public class ReservationResponse {
     String customerId;
     List<ActivityResponse> activities = new ArrayList<>();
 
+    public ReservationResponse(Reservation reservation) {
+        this.reservationId = reservation.getReservationId();
+        this.numberOfParticipants = reservation.getNumberOfParticipants();
+        this.date = reservation.getDate();
+        this.time = reservation.getTime();
+    }
+
+
     // Convert Reservation Entity to Reservation DTO
     public ReservationResponse(Reservation r, boolean includeAll){
      //   for (int i = 0; i < r.getActivities().size(); i++) {
