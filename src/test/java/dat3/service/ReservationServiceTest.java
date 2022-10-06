@@ -1,12 +1,9 @@
 package dat3.service;
 
-import dat3.adventure.dto.EmployeeRequest;
-import dat3.adventure.dto.EmployeeResponse;
-import dat3.adventure.entity.Employee;
+import dat3.adventure.dto.ReservationRequest;
+import dat3.adventure.dto.ReservationResponse;
 import dat3.adventure.entity.Reservation;
-import dat3.adventure.repository.EmployeeRepository;
 import dat3.adventure.repository.ReservationRepository;
-import dat3.adventure.service.EmployeeService;
 import dat3.adventure.service.ReservationService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,48 +22,48 @@ public class ReservationServiceTest {
     public static void setupReservations(@Autowired ReservationRepository reservationRepository1){
         reservationRepository1.deleteAll();
         reservationRepository = reservationRepository1;
-        reservationRepository.save(new Reservation(5, ));
-        reservationRepository.save(new Employee("Jørgen", "Str", "Str", "Str"));
+        reservationRepository.save(new Reservation(5, "202020", "2000", 3));
+        reservationRepository.save(new Reservation(6,"303030","3000",4));
     }
 
     @BeforeEach
     void setupEach(){
-        employeeService = new EmployeeService(employeeRepository);
+        reservationService = new ReservationService(reservationRepository);
     }
 
     @Test
-    void getEmployeesTest() {
-        assertEquals(2, employeeService.getEmployees().size());
+    void getReservationsTest() {
+        assertEquals(2, reservationService.getReservations().size());
     }
     @Test
-    void findByEmployeeIdTest() {
-        assertEquals("Skørgen", employeeService.findByEmployeeId(1).getEmployeeName());
-        assertEquals("Jørgen", employeeService.findByEmployeeId(2).getEmployeeName());
+    void findByReservationIdTest() {
+        assertEquals(5, reservationService.findByReservationId(1).getNumerOfParticipants());
+        assertEquals(6, reservationService.findByReservationId(2).getNumberofParticipants());
     }
     @Test
-    void editEmployeeTest() throws Exception{
-        //Change employee
-        EmployeeRequest request = new EmployeeRequest(new Employee("Mørgen","LolTurneringsManager", "MørgLol", "pw"));
-        employeeService.editEmployee(request, 2);
+    void editReservationTest() throws Exception{
+        //Change reservation
+        ReservationRequest request = new ReservationRequest(new Reservation(7,"909090", "1000", 5));
+        reservationService.editReservation(request, 2);
         //Verify the changes
-        EmployeeResponse response = employeeService.findByEmployeeId(2);
-        assertEquals("Mørgen", response.getEmployeeName());
-        assertEquals("LolTurneringsManager", response.getRole());
-        assertEquals("MørgLol", response.getUsername());
+        ReservationResponse response = resevationService.findByReservationId(2);
+        assertEquals(7, response.getNumberOfParticipants());
+        assertEquals("909090", response.getDate());
+        assertEquals("1000", response.getCustomerId());
 
     }
 
     @Test
-    void deleteEmployeeByIdTest(){
-        employeeRepository.deleteById(1);
-        assertEquals(1, employeeRepository.count());
+    void deleteReservationByIdTest(){
+        reservationRepository.deleteById(1);
+        assertEquals(1, reservationRepository.count());
     }
 
     @Test
-    void addEmployeeTest(){
-        Employee employee = new Employee("Lørgen", "SubnauticaManager", "LørgLogin", "LørgPW");
-        EmployeeRequest request = new EmployeeRequest(employee);
-        employeeService.addEmployee(request);
-        assertEquals(3, employeeRepository.count());
+    void addReservationTest(){
+        Reservation reservation = new Reservation(10, "707070", "2300", 20);
+        ReservationRequest request = new ReservationRequest(reservation);
+        reservationService.addReservation(request);
+        assertEquals(3, reservationRepository.count());
     }
 }
