@@ -27,13 +27,15 @@ public class EmployeeService {
         List<EmployeeResponse> response = employees.stream().map(employee -> new EmployeeResponse(employee)).collect(Collectors.toList());
         return response;
     }
-    public EmployeeResponse findByEmployeeId(int employeeId) throws Exception{
-        Employee found = employeeRepository.findById(employeeId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Employee with this ID not found"));
+
+    public EmployeeResponse findByEmployeeId(int employeeId) throws Exception {
+        Employee found = employeeRepository.findById(employeeId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee with this ID not found"));
         return new EmployeeResponse(found);
     }
-    public EmployeeResponse addEmployee(EmployeeRequest employeeRequest){
-        if(employeeRepository.existsById(employeeRequest.getEmployeeId())){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Employee with this ID already exists");
+
+    public EmployeeResponse addEmployee(EmployeeRequest employeeRequest) {
+        if (employeeRepository.existsById(employeeRequest.getEmployeeId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Employee with this ID already exists");
         }
         Employee newEmployee = EmployeeRequest.getEmployeeEntity(employeeRequest);
         newEmployee = employeeRepository.save(newEmployee);
@@ -41,4 +43,20 @@ public class EmployeeService {
         return new EmployeeResponse(newEmployee);
     }
 
+    public void editEmployee(Employee body, int employeeId) {
+        Employee employee = employeeRepository.findById(employeeId).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Employee with this ID already exists"));
+        if (body.getEmployeeId() != employeeId) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Can't change employee ID");
+        }
+        employee.setEmployeeId(body.getEmployeeId());
+        employee.setEmployeeName(body.getEmployeeName());
+        employee.setRole(body.getRole());
+        employee.setUsername(body.getUsername());
+        employee.setPassword(body.getPassword());
+    }
+
+    public void deleteEmployeeById(int employeeId) {
+        employeeRepository.deleteById(employeeId);
+    }
 }
