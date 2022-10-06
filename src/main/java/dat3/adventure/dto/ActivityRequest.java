@@ -21,6 +21,8 @@ public class ActivityRequest {
     int minimumHeight;
     //int duration;
     double pricePerHour;
+    List<Equipment> equipment = new ArrayList<>();
+    Reservation reservation;
 
     public static Activity getActivityEntity(ActivityRequest arq) {
         return new Activity(arq.getActivityName(), arq.getMinimumAge(), arq.getMinimumHeight(), arq.getPricePerHour());

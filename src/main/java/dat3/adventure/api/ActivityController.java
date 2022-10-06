@@ -13,24 +13,25 @@ import java.util.List;
 @RestController
 @RequestMapping("api/activities")
 public class ActivityController {
-    ActivityService activityService;
+  ActivityService activityService;
 
-    public ActivityController(ActivityService activityService){
-        this.activityService = activityService;
-    }
+  public ActivityController(ActivityService activityService) {
+    this.activityService = activityService;
+  }
 
-    @GetMapping
-    public List<ActivityResponse> getActivities(){
-        return activityService.getActivities();
-    }
+  @GetMapping
+  public List<ActivityResponse> getActivities() {
+    return activityService.getActivities();
+  }
 
-    @PostMapping
-    public ActivityResponse addActivity(@RequestBody ActivityRequest body){
-        return activityService.addActivity(body);
-    }
-    @PutMapping
-    public ResponseEntity<Boolean> editActivity(@RequestBody ActivityRequest body, @PathVariable String name) {
-        activityService.editActivity(body, name);
-        return new ResponseEntity<>(true, HttpStatus.OK);
-    }
+  @PostMapping
+  public ActivityResponse addActivity(@RequestBody ActivityRequest body) {
+    return activityService.addActivity(body);
+  }
+
+  @PutMapping
+  public ResponseEntity<Boolean> editActivity(@RequestBody ActivityRequest body, @PathVariable String name) {
+    activityService.editActivity(body, name);
+    return new ResponseEntity<>(true, HttpStatus.OK);
+  }
 }

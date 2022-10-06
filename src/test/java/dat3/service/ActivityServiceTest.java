@@ -39,10 +39,17 @@ public class ActivityServiceTest {
 
     @Test
     void editActivityTest() {
+        ActivityRequest request = new ActivityRequest("LOL turnering", 21, 160, 7000);
 
         assertEquals(15, activityService.getActivityByName("Gokart").getMinimumAge());
         assertEquals(140, activityService.getActivityByName("Gokart").getMinimumHeight());
         assertEquals(450, activityService.getActivityByName("Gokart").getPricePerHour());
+
+        activityService.editActivity(request, "Gokart");
+
+        assertEquals(21, activityService.getActivityByName("LOL turnering").getMinimumAge());
+        assertEquals(160, activityService.getActivityByName("LOL turnering").getMinimumHeight());
+        assertEquals(7000, activityService.getActivityByName("LOL turnering").getPricePerHour());
 
     }
 }
