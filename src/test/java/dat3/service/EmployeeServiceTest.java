@@ -60,4 +60,12 @@ public class EmployeeServiceTest {
         assertEquals(1, employeeRepository.count());
     }
 
+    @Test
+    void addEmployeeTest(){
+        Employee employee = new Employee("Lørgen", "SubnauticaManager", "LørgLogin", "LørgPW");
+        EmployeeRequest request = new EmployeeRequest(employee);
+        employeeService.addEmployee(request);
+        assertEquals(3, employeeRepository.count());
+    }
+
 }
