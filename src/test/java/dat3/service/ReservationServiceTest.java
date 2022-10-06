@@ -2,8 +2,6 @@ package dat3.service;
 
 import dat3.adventure.dto.ReservationRequest;
 import dat3.adventure.dto.ReservationResponse;
-import dat3.adventure.entity.Activity;
-import dat3.adventure.entity.Customer;
 import dat3.adventure.entity.Reservation;
 import dat3.adventure.repository.ActivityRepository;
 import dat3.adventure.repository.CustomerRepository;

@@ -42,9 +42,6 @@ public class Customer {
     reservations.add(reservation);
   }
 
-
-
-
   public Customer(String customerName, String customerEmail, String phoneNumber, String companyName, String cvrNumber) {
     this.customerName = customerName;
     this.customerEmail = customerEmail;

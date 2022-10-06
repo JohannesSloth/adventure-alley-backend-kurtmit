@@ -2,12 +2,14 @@ package dat3.adventure.dto;
 
 
 import dat3.adventure.entity.Customer;
+import dat3.adventure.entity.Reservation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,10 +24,11 @@ public class CustomerRequest {
   String phoneNumber;
   String companyName;
   String cvrNumber;
+  List<Reservation> reservations;
 
   public static Customer getCustomerEntity(CustomerRequest crq){
     return new Customer(crq.getCustomerId(), crq.getCustomerName(), crq.getCustomerEmail(), crq.getPhoneNumber(),
-        crq.getCompanyName(), crq.getCvrNumber());
+        crq.getCompanyName(), crq.getCvrNumber(),crq.getReservations());
   }
 
   public CustomerRequest(Customer c) {
