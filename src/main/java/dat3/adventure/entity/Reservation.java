@@ -49,13 +49,10 @@ public class Reservation {
     //activities.setActivity(this);
   }*/
 
-  /*public Reservation(int reservationId, int numberOfParticipants, String date, String time, LocalDateTime created, LocalDateTime edited, int customerId) {
-    this.reservationId = reservationId;
+  public Reservation(int numberOfParticipants, String date, String time, int customerId) {
     this.numberOfParticipants = numberOfParticipants;
     this.date = date;
     this.time = time;
-    this.created = created;
-    this.edited = edited;
     this.customerId = customerId;
-  }*/
+  }
 }

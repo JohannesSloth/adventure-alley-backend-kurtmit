@@ -45,7 +45,7 @@ public class EmployeeService {
 
     public void editEmployee(EmployeeRequest body, int employeeId) {
         Employee employee = employeeRepository.findById(employeeId).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Employee with this ID already exists"));
+                () -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Can't find employee with this ID"));
         //employee.setEmployeeId(body.getEmployeeId());
         employee.setEmployeeName(body.getEmployeeName());
         employee.setRole(body.getRole());
