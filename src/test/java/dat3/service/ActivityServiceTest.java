@@ -1,4 +1,4 @@
-package dat3.ActivityTest;
+package dat3.service;
 
 import dat3.adventure.dto.ActivityRequest;
 import dat3.adventure.dto.ActivityResponse;
@@ -14,7 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
-public class ActivityControllerTest {
+public class ActivityServiceTest {
 
     public ActivityService activityService;
     public static ActivityRepository activityRepository;
@@ -23,8 +23,8 @@ public class ActivityControllerTest {
     public static void setupActivity(@Autowired ActivityRepository activityRepository1){
         activityRepository1.deleteAll();
         activityRepository = activityRepository1;
-        activityRepository.save(new Activity("Gokart", 15, 140,450));
-        activityRepository.save(new Activity("Sumo", 18, 170,650));
+        activityRepository.save(new Activity("gokart", 15, 140,450));
+        activityRepository.save(new Activity("sumo", 18, 170,650));
     }
 
     @BeforeEach
@@ -39,10 +39,18 @@ public class ActivityControllerTest {
 
     @Test
     void editActivityTest() {
-
-        assertEquals(15, activityService.getActivityByName("Gokart").getMinimumAge());
-        assertEquals(140, activityService.getActivityByName("Gokart").getMinimumHeight());
-        assertEquals(450, activityService.getActivityByName("Gokart").getPricePerHour());
-
+        ActivityRequest request = new ActivityRequest(new Activity(21, 160, 7000));
+        activityService.editActivity(request, "gokart");
+        ActivityResponse response = activityService.getActivityById("gokart");
+        assertEquals(21, response.getMinimumAge());
+        assertEquals(160, response.getMinimumHeight());
+        assertEquals(7000, response.getPricePerHour());
     }
+
+    @Test
+    void deleteActivityByName() {
+        activityRepository.deleteById("gokart");
+        assertEquals(1,activityService.getActivities().size());
+    }
+
 }

@@ -28,6 +28,14 @@ public class CustomerRequest {
         crq.getCompanyName(), crq.getCvrNumber());
   }
 
+  public CustomerRequest(Customer c) {
+    this.customerName = c.getCustomerName();
+    this.customerEmail = c.getCustomerEmail();
+    this.phoneNumber = c.getPhoneNumber();
+    this.companyName = c.getCompanyName();
+    this.cvrNumber = c.getCvrNumber();
+  }
+
   public CustomerRequest(int customerId, String customerName, String customerEmail, String phoneNumber) {
     this.customerId = customerId;
     this.customerName = customerName;
