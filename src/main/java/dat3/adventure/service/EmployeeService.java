@@ -28,7 +28,7 @@ public class EmployeeService {
         return response;
     }
 
-    public EmployeeResponse findByEmployeeId(int employeeId) throws Exception {
+    public EmployeeResponse findByEmployeeId(int employeeId) {
         Employee found = employeeRepository.findById(employeeId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee with this ID not found"));
         return new EmployeeResponse(found);
     }
@@ -43,17 +43,15 @@ public class EmployeeService {
         return new EmployeeResponse(newEmployee);
     }
 
-    public void editEmployee(Employee body, int employeeId) {
+    public void editEmployee(EmployeeRequest body, int employeeId) {
         Employee employee = employeeRepository.findById(employeeId).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Employee with this ID already exists"));
-        if (body.getEmployeeId() != employeeId) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Can't change employee ID");
-        }
-        employee.setEmployeeId(body.getEmployeeId());
+        //employee.setEmployeeId(body.getEmployeeId());
         employee.setEmployeeName(body.getEmployeeName());
         employee.setRole(body.getRole());
         employee.setUsername(body.getUsername());
         employee.setPassword(body.getPassword());
+        employeeRepository.save(employee);
     }
 
     public void deleteEmployeeById(int employeeId) {

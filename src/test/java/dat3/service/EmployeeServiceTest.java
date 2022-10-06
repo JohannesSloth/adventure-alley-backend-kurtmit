@@ -1,5 +1,7 @@
 package dat3.service;
 
+import dat3.adventure.dto.EmployeeRequest;
+import dat3.adventure.dto.EmployeeResponse;
 import dat3.adventure.entity.Employee;
 import dat3.adventure.repository.EmployeeRepository;
 import dat3.adventure.service.EmployeeService;
@@ -35,9 +37,21 @@ public class EmployeeServiceTest {
         assertEquals(2, employeeService.getEmployees().size());
     }
     @Test
-    void findByEmployeeId() throws Exception {
+    void findByEmployeeIdTest() {
         assertEquals("Skørgen", employeeService.findByEmployeeId(1).getEmployeeName());
         assertEquals("Jørgen", employeeService.findByEmployeeId(2).getEmployeeName());
+    }
+    @Test
+    void editEmployeeTest() throws Exception{
+        //Change employee
+        EmployeeRequest request = new EmployeeRequest(new Employee("Mørgen","LolTurneringsManager", "MørgLol", "pw"));
+        employeeService.editEmployee(request, 2);
+        //Verify the changes
+        EmployeeResponse response = employeeService.findByEmployeeId(2);
+        assertEquals("Mørgen", response.getEmployeeName());
+        assertEquals("LolTurneringsManager", response.getRole());
+        assertEquals("MørgLol", response.getUsername());
+
     }
 
     @Test
