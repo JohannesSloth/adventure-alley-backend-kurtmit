@@ -28,7 +28,6 @@ public class EmployeeRequest {
     }
 
     public EmployeeRequest(int employeeId, String employeeName, String role, String username, String password) {
-        this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.role = role;
         this.username = username;
