@@ -38,27 +38,21 @@ public class ActivityService {
     return new ActivityResponse(newActivity);
   }
 
-  public void editActivity(ActivityRequest body, String name) {
+  public void editActivity(ActivityRequest body, String activityName) {
     //Activity activity = ActivityRequest.getActivityEntity(body);
+    Activity activity = activityRepository.findById(activityName).orElseThrow(
+        () -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "En aktivitet eksisterer med dette ID"));
 
-    Activity activity = activityRepository.findById(name).orElseThrow(
-        () -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "En aktivitet eksisterer med dette navn"));
-
-    if (!body.getActivityName().equalsIgnoreCase(name)) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Kan ikke finde aktiviteten med dette navn");
-    } else {
-      activity.setActivityName(body.getActivityName());
       activity.setEquipment(body.getEquipment());
       activity.setMinimumAge(body.getMinimumAge());
       activity.setMinimumHeight(body.getMinimumHeight());
       activity.setPricePerHour(body.getPricePerHour());
-      activity.setReservation(body.getReservation());
-    }
 
-    activityRepository.save(activity);
+      activityRepository.save(activity);
   }
 
-  public ActivityResponse getActivityByName(String activityName) {
-    return new ActivityResponse(activityRepository.findById(activityName).get());
+  public ActivityResponse getActivityById(String activityName){
+    Activity found = activityRepository.findById(activityName).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Kan ikke finde aktiviteten"));
+    return new ActivityResponse(found);
   }
 }

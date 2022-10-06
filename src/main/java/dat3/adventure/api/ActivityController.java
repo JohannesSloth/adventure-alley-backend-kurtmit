@@ -30,8 +30,8 @@ public class ActivityController {
   }
 
   @PutMapping
-  public ResponseEntity<Boolean> editActivity(@RequestBody ActivityRequest body, @PathVariable String name) {
-    activityService.editActivity(body, name);
+  public ResponseEntity<Boolean> editActivity(@RequestBody ActivityRequest body, @PathVariable String activityName) {
+    activityService.editActivity(body, activityName);
     return new ResponseEntity<>(true, HttpStatus.OK);
   }
 }

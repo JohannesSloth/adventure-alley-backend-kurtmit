@@ -48,4 +48,14 @@ public class Activity {
         this.minimumHeight = minimumHeight;
         this.pricePerHour = pricePerHour;
     }
+
+    public Activity(int minimumAge, int minimumHeight, double pricePerHour) {
+        this.minimumAge = minimumAge;
+        this.minimumHeight = minimumHeight;
+        this.pricePerHour = pricePerHour;
+    }
+
+
+
+
 }

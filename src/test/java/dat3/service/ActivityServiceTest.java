@@ -23,8 +23,8 @@ public class ActivityServiceTest {
     public static void setupActivity(@Autowired ActivityRepository activityRepository1){
         activityRepository1.deleteAll();
         activityRepository = activityRepository1;
-        activityRepository.save(new Activity("Gokart", 15, 140,450));
-        activityRepository.save(new Activity("Sumo", 18, 170,650));
+        activityRepository.save(new Activity("gokart", 15, 140,450));
+        activityRepository.save(new Activity("sumo", 18, 170,650));
     }
 
     @BeforeEach
@@ -39,17 +39,14 @@ public class ActivityServiceTest {
 
     @Test
     void editActivityTest() {
-        ActivityRequest request = new ActivityRequest("LOL turnering", 21, 160, 7000);
-
-        assertEquals(15, activityService.getActivityByName("Gokart").getMinimumAge());
-        assertEquals(140, activityService.getActivityByName("Gokart").getMinimumHeight());
-        assertEquals(450, activityService.getActivityByName("Gokart").getPricePerHour());
-
-        activityService.editActivity(request, "Gokart");
-
-        assertEquals(21, activityService.getActivityByName("LOL turnering").getMinimumAge());
-        assertEquals(160, activityService.getActivityByName("LOL turnering").getMinimumHeight());
-        assertEquals(7000, activityService.getActivityByName("LOL turnering").getPricePerHour());
-
+        ActivityRequest request = new ActivityRequest(new Activity(21, 160, 7000));
+        activityService.editActivity(request, "gokart");
+        ActivityResponse response = activityService.getActivityById("gokart");
+        assertEquals(21, response.getMinimumAge());
+        assertEquals(160, response.getMinimumHeight());
+        assertEquals(7000, response.getPricePerHour());
     }
+
+
+
 }
