@@ -50,8 +50,7 @@ public class ActivityServiceTest {
     @Test
     void deleteActivityByName() {
         activityRepository.deleteById("gokart");
-
-        ActivityResponse response = activityService.getActivityById("gokart");
-        assertEquals(0,response.getActivityName());
+        assertEquals(1,activityService.getActivities().size());
     }
+
 }

@@ -50,5 +50,10 @@ public class CustomerServiceTest {
     assertEquals("gg.dk", response.getCustomerEmail());
   }
 
+  @Test
+  void deleteCustomerById() {
+    customerService.deleteById(1);
+    assertEquals(1,customerService.getCustomers().size());
+  }
 
 }
