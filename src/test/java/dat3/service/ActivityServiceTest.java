@@ -1,4 +1,4 @@
-package dat3.ActivityTest;
+package dat3.service;
 
 import dat3.adventure.dto.ActivityRequest;
 import dat3.adventure.dto.ActivityResponse;
@@ -14,7 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
-public class ActivityControllerTest {
+public class ActivityServiceTest {
 
     public ActivityService activityService;
     public static ActivityRepository activityRepository;
