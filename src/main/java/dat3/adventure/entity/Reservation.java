@@ -48,13 +48,4 @@ public class Reservation {
   //  activities.add(act);
   //}
 
-  public Reservation(int reservationId, int numberOfParticipants, String date, String time, LocalDateTime created, LocalDateTime edited, int customerId) {
-    this.reservationId = reservationId;
-    this.numberOfParticipants = numberOfParticipants;
-    this.date = date;
-    this.time = time;
-    this.created = created;
-    this.edited = edited;
-    this.customerId = customerId;
-  }
 }
