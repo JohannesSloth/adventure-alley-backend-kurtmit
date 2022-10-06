@@ -2,13 +2,17 @@ package dat3.adventure.service;
 
 import dat3.adventure.dto.ReservationRequest;
 import dat3.adventure.dto.ReservationResponse;
+import dat3.adventure.entity.Activity;
+import dat3.adventure.entity.Customer;
 import dat3.adventure.entity.Reservation;
+import dat3.adventure.repository.ActivityRepository;
 import dat3.adventure.repository.CustomerRepository;
 import dat3.adventure.repository.ReservationRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,8 +21,11 @@ public class ReservationService {
 
     ReservationRepository reservationRepository;
     CustomerRepository customerRepository;
+    ActivityRepository activityRepository;
 
-    public ReservationService(ReservationRepository reservationRepository) {
+    public ReservationService(ReservationRepository reservationRepository, CustomerRepository customerRepository, ActivityRepository activityRepository) {
+        this.customerRepository = customerRepository;
+        this.activityRepository = activityRepository;
         this.reservationRepository = reservationRepository;
     }
 
@@ -28,11 +35,20 @@ public class ReservationService {
         return response;
     }
     public ReservationResponse findByReservationId(int reservationId) {
+
         Reservation found = reservationRepository.findById(reservationId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Reservation with this ID not found"));
         return new ReservationResponse(found, false);
     }
 
     public ReservationResponse addReservation(ReservationRequest reservationRequest) {
+
+        Customer customer = customerRepository.findById(reservationRequest.getCustomer().getCustomerId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Customer not found"));
+
+        List<Activity> activities = new ArrayList<>();
+
+        reservationRequest.getActivities().stream().map(activity -> activities.add(activity));
+
         if (reservationRepository.existsById(reservationRequest.getReservationId())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Reservation with this ID already exists");
         }
@@ -51,7 +67,8 @@ public class ReservationService {
         reservation.setNumberOfParticipants(body.getNumberOfParticipants());
         reservation.setDate(body.getDate());
         reservation.setTime(body.getTime());
-        reservation.setCustomerId(body.getCustomerId());
+        reservation.setCustomer(body.getCustomer());
+        reservation.setActivities(body.getActivities());
     }
 
     public void deleteReservationById(int reservationId) {

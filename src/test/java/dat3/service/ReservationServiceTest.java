@@ -5,6 +5,8 @@ import dat3.adventure.dto.ReservationResponse;
 import dat3.adventure.entity.Activity;
 import dat3.adventure.entity.Customer;
 import dat3.adventure.entity.Reservation;
+import dat3.adventure.repository.ActivityRepository;
+import dat3.adventure.repository.CustomerRepository;
 import dat3.adventure.repository.ReservationRepository;
 import dat3.adventure.service.ReservationService;
 import org.junit.jupiter.api.BeforeAll;
@@ -19,18 +21,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ReservationServiceTest {
     public ReservationService reservationService;
     public static ReservationRepository reservationRepository;
+    public static CustomerRepository customerRepository;
+    public static ActivityRepository activityRepository;
 
     @BeforeAll
     public static void setupReservations(@Autowired ReservationRepository reservationRepository1){
         reservationRepository1.deleteAll();
         reservationRepository = reservationRepository1;
-        reservationRepository.save(new Reservation(5, "202020", "2000", 3,(new Customer()),(new Activity())));
-        reservationRepository.save(new Reservation(6,"303030","3000",4,(new Customer()),(new Activity())));
+        reservationRepository.save(new Reservation(5, "202020", "2000"));
+        reservationRepository.save(new Reservation(6,"303030","3000"));
     }
 
     @BeforeEach
     void setupEach(){
-        reservationService = new ReservationService(reservationRepository);
+        reservationService = new ReservationService(reservationRepository, customerRepository,activityRepository);
     }
 
     @Test
@@ -43,9 +47,9 @@ public class ReservationServiceTest {
         assertEquals(6, reservationService.findByReservationId(2).getNumberOfParticipants());
     }
     @Test
-    void editReservationTest() throws Exception{
+    void editReservationTest(){
         //Change reservation
-        ReservationRequest request = new ReservationRequest(new Reservation(7,"909090", "1000", 5));
+        ReservationRequest request = new ReservationRequest(new Reservation(7,"909090", "1000"));
         reservationService.editReservation(request, 2);
         //Verify the changes
         ReservationResponse response = reservationService.findByReservationId(2);

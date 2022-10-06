@@ -24,7 +24,7 @@ public class ReservationResponse {
     String date;
     String time;
     Customer customer;
-    Activity activity;
+    List<Activity> activities;
 
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
     LocalDateTime created;
@@ -40,7 +40,7 @@ public class ReservationResponse {
         this.date = r.getDate();
         this.time = r.getTime();
         this.customer = r.getCustomer();
-        this.activity = r.getActivity();
+        this.activities = r.getActivities();
     }
 
 
