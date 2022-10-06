@@ -14,45 +14,49 @@ import java.util.stream.Collectors;
 
 @Service
 public class ActivityService {
-  private ActivityRepository activityRepository;
+    private ActivityRepository activityRepository;
 
-  public ActivityService(ActivityRepository activityRepository) {
-    this.activityRepository = activityRepository;
-  }
-
-  public List<ActivityResponse> getActivities() {
-    List<Activity> activities = activityRepository.findAll();
-    List<ActivityResponse> response = activities.stream().map(activity -> new ActivityResponse(activity)).collect(Collectors.toList());
-    return response;
-
-  }
-
-  public ActivityResponse addActivity(ActivityRequest activityRequest) {
-    if (activityRepository.existsById(activityRequest.getActivityName())) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Activiteten med dette navn findes allerede.");
+    public ActivityService(ActivityRepository activityRepository) {
+        this.activityRepository = activityRepository;
     }
 
-    Activity newActivity = ActivityRequest.getActivityEntity(activityRequest);
-    activityRepository.save(newActivity);
+    public List<ActivityResponse> getActivities() {
+        List<Activity> activities = activityRepository.findAll();
+        List<ActivityResponse> response = activities.stream().map(activity -> new ActivityResponse(activity)).collect(Collectors.toList());
+        return response;
 
-    return new ActivityResponse(newActivity);
-  }
+    }
 
-  public void editActivity(ActivityRequest body, String activityName) {
-    //Activity activity = ActivityRequest.getActivityEntity(body);
-    Activity activity = activityRepository.findById(activityName).orElseThrow(
-        () -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "En aktivitet eksisterer med dette ID"));
+    public ActivityResponse addActivity(ActivityRequest activityRequest) {
+        if (activityRepository.existsById(activityRequest.getActivityName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Activiteten med dette navn findes allerede.");
+        }
 
-      activity.setEquipment(body.getEquipment());
-      activity.setMinimumAge(body.getMinimumAge());
-      activity.setMinimumHeight(body.getMinimumHeight());
-      activity.setPricePerHour(body.getPricePerHour());
+        Activity newActivity = ActivityRequest.getActivityEntity(activityRequest);
+        activityRepository.save(newActivity);
 
-      activityRepository.save(activity);
-  }
+        return new ActivityResponse(newActivity);
+    }
 
-  public ActivityResponse getActivityById(String activityName){
-    Activity found = activityRepository.findById(activityName).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Kan ikke finde aktiviteten"));
-    return new ActivityResponse(found);
-  }
+    public void editActivity(ActivityRequest body, String activityName) {
+        //Activity activity = ActivityRequest.getActivityEntity(body);
+        Activity activity = activityRepository.findById(activityName).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "En aktivitet eksisterer med dette ID"));
+
+        activity.setEquipment(body.getEquipment());
+        activity.setMinimumAge(body.getMinimumAge());
+        activity.setMinimumHeight(body.getMinimumHeight());
+        activity.setPricePerHour(body.getPricePerHour());
+
+        activityRepository.save(activity);
+    }
+
+    public ActivityResponse getActivityById(String activityName) {
+        Activity found = activityRepository.findById(activityName).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Kan ikke finde aktiviteten"));
+        return new ActivityResponse(found);
+    }
+
+    public void deleteByName(String name) {
+        activityRepository.deleteById(name);
+    }
 }

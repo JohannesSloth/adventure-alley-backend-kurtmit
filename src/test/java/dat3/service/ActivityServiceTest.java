@@ -47,6 +47,11 @@ public class ActivityServiceTest {
         assertEquals(7000, response.getPricePerHour());
     }
 
+    @Test
+    void deleteActivityByName() {
+        activityRepository.deleteById("gokart");
 
-
+        ActivityResponse response = activityService.getActivityById("gokart");
+        assertEquals(0,response.getActivityName());
+    }
 }

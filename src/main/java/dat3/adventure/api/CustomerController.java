@@ -1,10 +1,7 @@
 package dat3.adventure.api;
 
-import dat3.adventure.dto.ActivityRequest;
-import dat3.adventure.dto.ActivityResponse;
 import dat3.adventure.dto.CustomerRequest;
 import dat3.adventure.dto.CustomerResponse;
-import dat3.adventure.service.ActivityService;
 import dat3.adventure.service.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +15,7 @@ import java.util.List;
 public class CustomerController {
     CustomerService customerService;
 
-    public CustomerController(CustomerService customerService){
+    public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
 
@@ -36,5 +33,10 @@ public class CustomerController {
     public ResponseEntity<Boolean> editCustomer(@RequestBody CustomerRequest body, @PathVariable int id) {
         customerService.editCustomer(body, id);
         return new ResponseEntity<>(true, HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    public void deleteCustomerByID(@PathVariable int id) {
+        customerService.deleteById(id);
     }
 }

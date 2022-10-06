@@ -2,7 +2,6 @@ package dat3.adventure.dto;
 
 import dat3.adventure.entity.Activity;
 import dat3.adventure.entity.Equipment;
-import dat3.adventure.entity.Reservation;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

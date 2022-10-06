@@ -1,7 +1,6 @@
 package dat3.adventure.dto;
 
 
-import dat3.adventure.entity.Activity;
 import dat3.adventure.entity.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
