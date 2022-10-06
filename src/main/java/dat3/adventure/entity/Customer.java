@@ -3,6 +3,8 @@ package dat3.adventure.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,4 +34,11 @@ public class Customer {
 
   @Column(length= 50)
   String cvrNumber;
+
+  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+  private List<Reservation> reservations = new ArrayList<>();
+
+  public void addReservation(Reservation reservation){
+    reservations.add(reservation);
+  }
 }

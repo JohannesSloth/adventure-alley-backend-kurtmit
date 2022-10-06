@@ -42,17 +42,22 @@ public class Reservation {
   /*@OneToMany(mappedBy = "reservations", cascade = CascadeType.ALL)
   List<Activity> activities = new ArrayList<>();*/
 
-  int customerId;
+  @ManyToOne
+  Customer customer;
+
+  @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL)
+  private List<Activity> activities = new ArrayList<>();
 
   /*public void addActivity(Activity act){
     activities.add(act);
     //activities.setActivity(this);
   }*/
 
-  public Reservation(int numberOfParticipants, String date, String time, int customerId) {
+  public Reservation(int numberOfParticipants, String date, String time, int customerId, Customer customer, Activity activity) {
     this.numberOfParticipants = numberOfParticipants;
     this.date = date;
     this.time = time;
-    this.customerId = customerId;
+    this.customer = customer;
+    this.activity = activity;
   }
 }
