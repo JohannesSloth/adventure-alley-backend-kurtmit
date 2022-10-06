@@ -2,6 +2,8 @@ package dat3.adventure.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import dat3.adventure.entity.Activity;
+import dat3.adventure.entity.Customer;
 import dat3.adventure.entity.Reservation;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +23,8 @@ public class ReservationResponse {
     int numberOfParticipants;
     String date;
     String time;
+    Customer customer;
+    List<Activity> activities;
 
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
     LocalDateTime created;
@@ -28,8 +32,17 @@ public class ReservationResponse {
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
     LocalDateTime edited;
 
-    String customerId;
-    List<ActivityResponse> activities = new ArrayList<>();
+    //List<ActivityResponse> activities = new ArrayList<>();
+
+    public ReservationResponse(Reservation r) {
+        this.reservationId = r.getReservationId();
+        this.numberOfParticipants = r.getNumberOfParticipants();
+        this.date = r.getDate();
+        this.time = r.getTime();
+        this.customer = r.getCustomer();
+        this.activities = r.getActivities();
+    }
+
 
     // Convert Reservation Entity to Reservation DTO
     public ReservationResponse(Reservation r, boolean includeAll){

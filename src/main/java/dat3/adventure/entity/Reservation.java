@@ -39,13 +39,28 @@ public class Reservation {
   @UpdateTimestamp
   LocalDateTime edited;
 
-  //@OneToMany(mappedBy = "reservations", cascade = CascadeType.ALL)
-  //List<Activity> activities = new ArrayList<>();
+  @ManyToOne
+  Customer customer;
 
-  int customerId;
+  @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL)
+  private List<Activity> activities = new ArrayList<>();
 
-  //public void addActivity(Activity act){
-  //  activities.add(act);
-  //}
+  /*public void addActivity(Activity act){
+    activities.add(act);
+    //activities.setActivity(this);
+  }*/
 
+  public Reservation(int numberOfParticipants, String date, String time) {
+    this.numberOfParticipants = numberOfParticipants;
+    this.date = date;
+    this.time = time;
+  }
+
+  public Reservation(int numberOfParticipants, String date, String time, int customerId, Customer customer, List<Activity> activities) {
+    this.numberOfParticipants = numberOfParticipants;
+    this.date = date;
+    this.time = time;
+    this.customer = customer;
+    this.activities = activities;
+  }
 }

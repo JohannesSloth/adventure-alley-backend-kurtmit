@@ -30,4 +30,10 @@ public class Employee {
   @Column(length= 50, nullable = false)
   String password;
 
+  public Employee(String employeeName, String role, String username, String password) {
+    this.employeeName = employeeName;
+    this.role = role;
+    this.username = username;
+    this.password = password;
+  }
 }

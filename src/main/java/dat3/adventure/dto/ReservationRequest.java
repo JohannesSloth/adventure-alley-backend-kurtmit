@@ -1,6 +1,7 @@
 package dat3.adventure.dto;
 
 import dat3.adventure.entity.Activity;
+import dat3.adventure.entity.Customer;
 import dat3.adventure.entity.Reservation;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,8 @@ public class ReservationRequest {
     int numberOfParticipants;
     String date;
     String time;
+    Customer customer;
+    List<Activity> activities;
 
     @CreationTimestamp
     LocalDateTime created;
@@ -30,10 +33,11 @@ public class ReservationRequest {
     @UpdateTimestamp
     LocalDateTime edited;
 
-    int customerId;
+
+
 
     public static Reservation getReservationEntity(ReservationRequest rrq) {
-        return new Reservation(rrq.getReservationId(), rrq.getNumberOfParticipants(), rrq.getDate(), rrq.getTime(), rrq.getCreated(), rrq.getEdited(), rrq.getCustomerId());
+        return new Reservation(rrq.getReservationId(), rrq.getNumberOfParticipants(), rrq.getDate(), rrq.getTime(), rrq.getCreated(), rrq.getEdited(),rrq.getCustomer(),rrq.getActivities());
     }
 
     public ReservationRequest (Reservation r) {
@@ -43,6 +47,7 @@ public class ReservationRequest {
         this.time = r.getTime();
         this.created = r.getCreated();
         this.edited = r.getEdited();
-        this.customerId = r.getCustomerId();
+        this.customer = r.getCustomer();
+        this.activities = r.getActivities();
     }
 }
