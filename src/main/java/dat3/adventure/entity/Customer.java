@@ -32,4 +32,12 @@ public class Customer {
 
   @Column(length= 50)
   String cvrNumber;
+
+  public Customer(String customerName, String customerEmail, String phoneNumber, String companyName, String cvrNumber) {
+    this.customerName = customerName;
+    this.customerEmail = customerEmail;
+    this.phoneNumber = phoneNumber;
+    this.companyName = companyName;
+    this.cvrNumber = cvrNumber;
+  }
 }

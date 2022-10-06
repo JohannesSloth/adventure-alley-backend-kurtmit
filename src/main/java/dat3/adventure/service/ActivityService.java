@@ -38,10 +38,25 @@ public class ActivityService {
         return new ActivityResponse(newActivity);
     }
 
-    public void editActivity(ActivityRequest body, String name) {
+    public void editActivity(ActivityRequest body, String activityName) {
+        //Activity activity = ActivityRequest.getActivityEntity(body);
+        Activity activity = activityRepository.findById(activityName).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "En aktivitet eksisterer med dette ID"));
+
+        activity.setEquipment(body.getEquipment());
+        activity.setMinimumAge(body.getMinimumAge());
+        activity.setMinimumHeight(body.getMinimumHeight());
+        activity.setPricePerHour(body.getPricePerHour());
+
+        activityRepository.save(activity);
     }
 
-    public ActivityResponse getActivityByName(String activityName) {
-        return new ActivityResponse(activityRepository.findById(activityName).get());
+    public ActivityResponse getActivityById(String activityName) {
+        Activity found = activityRepository.findById(activityName).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Kan ikke finde aktiviteten"));
+        return new ActivityResponse(found);
+    }
+
+    public void deleteByName(String name) {
+        activityRepository.deleteById(name);
     }
 }

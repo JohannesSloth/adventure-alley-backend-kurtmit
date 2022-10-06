@@ -15,22 +15,28 @@ import java.util.List;
 public class ActivityController {
     ActivityService activityService;
 
-    public ActivityController(ActivityService activityService){
+    public ActivityController(ActivityService activityService) {
         this.activityService = activityService;
     }
 
     @GetMapping
-    public List<ActivityResponse> getActivities(){
+    public List<ActivityResponse> getActivities() {
         return activityService.getActivities();
     }
 
     @PostMapping
-    public ActivityResponse addActivity(@RequestBody ActivityRequest body){
+    public ActivityResponse addActivity(@RequestBody ActivityRequest body) {
         return activityService.addActivity(body);
     }
+
     @PutMapping
-    public ResponseEntity<Boolean> editActivity(@RequestBody ActivityRequest body, @PathVariable String name) {
-        activityService.editActivity(body, name);
+    public ResponseEntity<Boolean> editActivity(@RequestBody ActivityRequest body, @PathVariable String activityName) {
+        activityService.editActivity(body, activityName);
         return new ResponseEntity<>(true, HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    public void deleteActivityByName(@PathVariable String name) {
+        activityService.deleteByName(name);
     }
 }
