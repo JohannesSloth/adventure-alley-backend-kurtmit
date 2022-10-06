@@ -39,4 +39,11 @@ public class EmployeeServiceTest {
         assertEquals("Skørgen", employeeService.findByEmployeeId(1).getEmployeeName());
         assertEquals("Jørgen", employeeService.findByEmployeeId(2).getEmployeeName());
     }
+
+    @Test
+    void deleteEmployeeByIdTest(){
+        employeeRepository.deleteById(1);
+        assertEquals(1, employeeRepository.count());
+    }
+
 }
