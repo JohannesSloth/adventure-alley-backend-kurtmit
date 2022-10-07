@@ -21,10 +21,10 @@ public class ReservationResponse {
 
     int reservationId;
     int numberOfParticipants;
-    String date;
+    String rentalDate;
     String time;
     Customer customer;
-    List<Activity> activities;
+    Activity activity;
 
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
     LocalDateTime created;
@@ -37,25 +37,22 @@ public class ReservationResponse {
     public ReservationResponse(Reservation r) {
         this.reservationId = r.getReservationId();
         this.numberOfParticipants = r.getNumberOfParticipants();
-        this.date = r.getDate();
+        this.rentalDate = r.getRentalDate();
         this.time = r.getTime();
         this.customer = r.getCustomer();
-        this.activities = r.getActivities();
+        this.activity = r.getActivity();
     }
 
 
     // Convert Reservation Entity to Reservation DTO
-    public ReservationResponse(Reservation r, boolean includeAll){
-     //   for (int i = 0; i < r.getActivities().size(); i++) {
-      //      ActivityResponse act = new ActivityResponse(r.getActivities().get(i));
-       //     activities.add(act);
-        //}
+    public ReservationResponse(Reservation r, boolean includeDate){
         this.reservationId = r.getReservationId();
         this.numberOfParticipants = r.getNumberOfParticipants();
-        this.date = r.getDate();
+        this.rentalDate = r.getRentalDate();
         this.time = r.getTime();
-
-        if(includeAll) {
+        this.activity = r.getActivity();
+        this.customer = r.getCustomer();
+        if(includeDate) {
             this.created = r.getCreated();
             this.edited = r.getEdited();
         }

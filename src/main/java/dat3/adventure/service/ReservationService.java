@@ -42,16 +42,17 @@ public class ReservationService {
 
     public ReservationResponse addReservation(ReservationRequest reservationRequest) {
 
-        Customer customer = customerRepository.findById(reservationRequest.getCustomer().getCustomerId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Customer not found"));
+        //boolean exists = reservationRepository.existsByActivity_ActivityNameAndRentalDateAndTime(reservationRequest.getActivity().getActivityName(),reservationRequest.getRentalDate(), reservationRequest.getTime());
 
-        List<Activity> activities = new ArrayList<>();
-
-        reservationRequest.getActivities().stream().map(activity -> activities.add(activity));
+        //if (exists) {
+        //    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Denne aktivitet er allerede booket på denne");
+        //}
 
         if (reservationRepository.existsById(reservationRequest.getReservationId())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Reservation with this ID already exists");
         }
+
+
         Reservation newReservation = ReservationRequest.getReservationEntity(reservationRequest);
         newReservation = reservationRepository.save(newReservation);
 
@@ -65,10 +66,10 @@ public class ReservationService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Can't change reservation");
         }*/
         reservation.setNumberOfParticipants(body.getNumberOfParticipants());
-        reservation.setDate(body.getDate());
+        reservation.setRentalDate(body.getRentalDate());
         reservation.setTime(body.getTime());
         reservation.setCustomer(body.getCustomer());
-        reservation.setActivities(body.getActivities());
+        reservation.setActivity(body.getActivity());
     }
 
     public void deleteReservationById(int reservationId) {
