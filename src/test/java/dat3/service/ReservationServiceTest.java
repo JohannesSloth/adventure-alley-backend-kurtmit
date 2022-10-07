@@ -52,7 +52,7 @@ public class ReservationServiceTest {
         //Verify the changes
         ReservationResponse response = reservationService.findByReservationId(2);
         assertEquals(7, response.getNumberOfParticipants());
-        assertEquals("909090", response.getDate());
+        assertEquals("909090", response.getRentalDate());
         assertEquals("1000", response.getTime());
         //assertEquals(5, response.getCustomerId());
 
