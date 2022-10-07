@@ -1,6 +1,5 @@
 package dat3.adventure.api;
 
-import dat3.adventure.dto.CustomerRequest;
 import dat3.adventure.dto.ReservationRequest;
 import dat3.adventure.dto.ReservationResponse;
 import dat3.adventure.service.ReservationService;
