@@ -69,7 +69,7 @@ public class ReservationService {
         reservation.setNumberOfParticipants(body.getNumberOfParticipants());
         reservation.setRentalDate(body.getRentalDate());
         reservation.setTime(body.getTime());
-        reservation.setCustomer(body.getCustomer());
+        reservation.setCustomerId(body.getCustomerId());
         reservation.setActivity(body.getActivity());
     }
 

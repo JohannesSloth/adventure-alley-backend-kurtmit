@@ -24,7 +24,7 @@ public class ReservationRequest {
     int numberOfParticipants;
     String rentalDate;
     String time;
-    Customer customer;
+    int customerId;
     Activity activity;
 
     @CreationTimestamp
@@ -34,10 +34,9 @@ public class ReservationRequest {
     LocalDateTime edited;
 
 
-
-
     public static Reservation getReservationEntity(ReservationRequest rrq) {
-        return new Reservation(rrq.getReservationId(), rrq.getNumberOfParticipants(), rrq.getRentalDate(), rrq.getTime(), rrq.getCreated(), rrq.getEdited(),rrq.getCustomer(),rrq.getActivity());
+        return new Reservation(rrq.getReservationId(), rrq.getNumberOfParticipants(), rrq.getRentalDate(), rrq.getTime(),
+            rrq.getCreated(), rrq.getEdited(),rrq.getCustomerId(),rrq.getActivity());
     }
 
     public ReservationRequest (Reservation r) {
@@ -47,7 +46,7 @@ public class ReservationRequest {
         this.time = r.getTime();
         this.created = r.getCreated();
         this.edited = r.getEdited();
-        this.customer = r.getCustomer();
+        this.customerId = r.getCustomerId();
         this.activity = r.getActivity();
     }
 }

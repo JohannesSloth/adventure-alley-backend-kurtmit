@@ -40,11 +40,10 @@ public class Reservation {
   @UpdateTimestamp
   LocalDateTime edited;
 
-  @ManyToOne
-  Customer customer;
+  int customerId;
 
   @OneToOne
-  private Activity activity;
+  Activity activity;
 
   public Reservation(int numberOfParticipants, String rentalDate, String time) {
     this.numberOfParticipants = numberOfParticipants;
@@ -52,11 +51,11 @@ public class Reservation {
     this.time = time;
   }
 
-  public Reservation(int numberOfParticipants, String rentalDate, String time, Customer customer, Activity activity) {
+  public Reservation(int numberOfParticipants, String rentalDate, String time, int customerId, Activity activity) {
     this.numberOfParticipants = numberOfParticipants;
     this.rentalDate = rentalDate;
     this.time = time;
-    this.customer = customer;
+    this.customerId = customerId;
     this.activity = activity;
   }
 }

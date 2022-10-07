@@ -23,7 +23,7 @@ public class ReservationResponse {
     int numberOfParticipants;
     String rentalDate;
     String time;
-    Customer customer;
+    int customerId;
     Activity activity;
 
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
@@ -39,7 +39,7 @@ public class ReservationResponse {
         this.numberOfParticipants = r.getNumberOfParticipants();
         this.rentalDate = r.getRentalDate();
         this.time = r.getTime();
-        this.customer = r.getCustomer();
+        this.customerId = r.getCustomerId();
         this.activity = r.getActivity();
     }
 
@@ -51,7 +51,7 @@ public class ReservationResponse {
         this.rentalDate = r.getRentalDate();
         this.time = r.getTime();
         this.activity = r.getActivity();
-        this.customer = r.getCustomer();
+        this.customerId = getCustomerId();
         if(includeDate) {
             this.created = r.getCreated();
             this.edited = r.getEdited();

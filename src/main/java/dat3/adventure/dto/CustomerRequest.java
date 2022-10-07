@@ -24,11 +24,10 @@ public class CustomerRequest {
   String phoneNumber;
   String companyName;
   String cvrNumber;
-  List<Reservation> reservations;
 
   public static Customer getCustomerEntity(CustomerRequest crq){
     return new Customer(crq.getCustomerId(), crq.getCustomerName(), crq.getCustomerEmail(), crq.getPhoneNumber(),
-        crq.getCompanyName(), crq.getCvrNumber(),crq.getReservations());
+        crq.getCompanyName(), crq.getCvrNumber());
   }
 
   public CustomerRequest(Customer c) {

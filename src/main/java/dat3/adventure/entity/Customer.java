@@ -35,12 +35,6 @@ public class Customer {
   @Column(length= 50)
   String cvrNumber;
 
-  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-  private List<Reservation> reservations = new ArrayList<>();
-
-  public void addReservation(Reservation reservation){
-    reservations.add(reservation);
-  }
 
   public Customer(String customerName, String customerEmail, String phoneNumber, String companyName, String cvrNumber) {
     this.customerName = customerName;
@@ -49,4 +43,5 @@ public class Customer {
     this.companyName = companyName;
     this.cvrNumber = cvrNumber;
   }
+
 }
