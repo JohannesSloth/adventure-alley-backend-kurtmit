@@ -34,6 +34,7 @@ public class ReservationService {
         List<ReservationResponse> response = reservations.stream().map(reservation -> new ReservationResponse(reservation)).collect(Collectors.toList());
         return response;
     }
+
     public ReservationResponse findByReservationId(int reservationId) {
 
         Reservation found = reservationRepository.findById(reservationId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Reservation with this ID not found"));

@@ -21,6 +21,7 @@ import java.util.List;
 
 @Entity
 public class Reservation {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   int reservationId;
@@ -42,13 +43,8 @@ public class Reservation {
   @ManyToOne
   Customer customer;
 
-  @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL)
+  @OneToOne
   private Activity activity;
-
-  /*public void addActivity(Activity act){
-    activities.add(act);
-    //activities.setActivity(this);
-  }*/
 
   public Reservation(int numberOfParticipants, String rentalDate, String time) {
     this.numberOfParticipants = numberOfParticipants;
