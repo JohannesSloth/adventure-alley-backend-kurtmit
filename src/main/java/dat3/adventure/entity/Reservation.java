@@ -28,7 +28,7 @@ public class Reservation {
   int numberOfParticipants;
 
   @Column(length= 50, nullable = false)
-  String date;
+  String rentalDate;
 
   @Column(length= 50, nullable = false)
   String time;
@@ -42,25 +42,25 @@ public class Reservation {
   @ManyToOne
   Customer customer;
 
-  @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL)
-  private List<Activity> activities = new ArrayList<>();
+  @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL)
+  private Activity activity;
 
   /*public void addActivity(Activity act){
     activities.add(act);
     //activities.setActivity(this);
   }*/
 
-  public Reservation(int numberOfParticipants, String date, String time) {
+  public Reservation(int numberOfParticipants, String rentalDate, String time) {
     this.numberOfParticipants = numberOfParticipants;
-    this.date = date;
+    this.rentalDate = rentalDate;
     this.time = time;
   }
 
-  public Reservation(int numberOfParticipants, String date, String time, int customerId, Customer customer, List<Activity> activities) {
+  public Reservation(int numberOfParticipants, String rentalDate, String time, int customerId, Customer customer, Activity activity) {
     this.numberOfParticipants = numberOfParticipants;
-    this.date = date;
+    this.rentalDate = rentalDate;
     this.time = time;
     this.customer = customer;
-    this.activities = activities;
+    this.activity = activity;
   }
 }

@@ -34,7 +34,7 @@ public class Activity {
     @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL)
     List<Equipment> equipment = new ArrayList<>();
 
-    @ManyToOne
+    @OneToOne
     Reservation reservation;
 
     public void addEquipment(Equipment eqp){
