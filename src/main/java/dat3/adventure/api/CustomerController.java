@@ -29,18 +29,18 @@ public class CustomerController {
         return customerService.addCustomer(body);
     }
 
-    @PutMapping("/{customerId")
+    @PutMapping("/{customerId}")
     public ResponseEntity<Boolean> editCustomer(@RequestBody CustomerRequest body, @PathVariable int customerId) {
         customerService.editCustomer(body, customerId);
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{customerId")
+    @DeleteMapping("/{customerId}")
     public void deleteCustomerByID(@PathVariable int customerId) {
         customerService.deleteById(customerId);
     }
 
-    @GetMapping("/{customerId")
+    @GetMapping("/{customerId}")
     public CustomerResponse getCustomerById(@PathVariable int customerId) throws Exception {
         CustomerResponse response = customerService.getCustomerById(customerId);
         return response;
