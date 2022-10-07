@@ -29,14 +29,20 @@ public class CustomerController {
         return customerService.addCustomer(body);
     }
 
-    @PutMapping
-    public ResponseEntity<Boolean> editCustomer(@RequestBody CustomerRequest body, @PathVariable int id) {
-        customerService.editCustomer(body, id);
+    @PutMapping("/{customerId")
+    public ResponseEntity<Boolean> editCustomer(@RequestBody CustomerRequest body, @PathVariable int customerId) {
+        customerService.editCustomer(body, customerId);
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public void deleteCustomerByID(@PathVariable int id) {
-        customerService.deleteById(id);
+    @DeleteMapping("/{customerId")
+    public void deleteCustomerByID(@PathVariable int customerId) {
+        customerService.deleteById(customerId);
+    }
+
+    @GetMapping("/{customerId")
+    public CustomerResponse getCustomerById(@PathVariable int customerId) throws Exception {
+        CustomerResponse response = customerService.getCustomerById(customerId);
+        return response;
     }
 }
