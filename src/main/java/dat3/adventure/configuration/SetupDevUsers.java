@@ -66,7 +66,9 @@ public class SetupDevUsers implements ApplicationRunner {
         Customer customer = new Customer("Smørgen", "Smørgen@yahoo.dk", "88888888", "Leasy", "876865");
         customer = customerRepository.save(customer);
         Activity activity = new Activity("Spille kiks", 4, 35, 6900);
+        activity = activityRepository.save(activity);
         Reservation reservation = reservationRepository.save(new Reservation(5,"07/10","11:15",customer.getCustomerId(),activity));
+        reservation = reservationRepository.save(reservation);
 
         customerRepository.save(customer);
         activityRepository.save(activity);
