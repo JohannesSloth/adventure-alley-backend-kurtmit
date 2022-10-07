@@ -56,7 +56,7 @@ public class Reservation {
     this.time = time;
   }
 
-  public Reservation(int numberOfParticipants, String rentalDate, String time, int customerId, Customer customer, Activity activity) {
+  public Reservation(int numberOfParticipants, String rentalDate, String time, Customer customer, Activity activity) {
     this.numberOfParticipants = numberOfParticipants;
     this.rentalDate = rentalDate;
     this.time = time;

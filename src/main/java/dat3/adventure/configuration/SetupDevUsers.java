@@ -1,5 +1,12 @@
 package dat3.adventure.configuration;
 
+import dat3.adventure.entity.Activity;
+import dat3.adventure.entity.Customer;
+import dat3.adventure.entity.Reservation;
+import dat3.adventure.repository.ActivityRepository;
+import dat3.adventure.repository.CustomerRepository;
+import dat3.adventure.repository.EmployeeRepository;
+import dat3.adventure.repository.ReservationRepository;
 import dat3.security.entity.Role;
 import dat3.security.entity.UserWithRoles;
 import org.springframework.boot.ApplicationArguments;
@@ -12,8 +19,18 @@ public class SetupDevUsers implements ApplicationRunner {
 
     UserWithRolesRepository userWithRolesRepository;
     String passwordUsedByAll;
+    ReservationRepository reservationRepository;
+    CustomerRepository customerRepository;
+    EmployeeRepository employeeRepository;
+    ActivityRepository activityRepository;
 
-    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository) {
+    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, ReservationRepository reservationRepository,
+                         CustomerRepository customerRepository, EmployeeRepository employeeRepository,
+                         ActivityRepository activityRepository) {
+        this.reservationRepository = reservationRepository;
+        this.customerRepository = customerRepository;
+        this.employeeRepository = employeeRepository;
+        this.activityRepository = activityRepository;
         this.userWithRolesRepository = userWithRolesRepository;
         passwordUsedByAll = "test12";
     }
@@ -44,7 +61,13 @@ public class SetupDevUsers implements ApplicationRunner {
         userWithRolesRepository.save(user2);
         userWithRolesRepository.save(user3);
 
+        Customer customer = new Customer("Smørgen", "Smørgen@yahoo.dk", "88888888", "Leasy", "876865");
+        Activity activity = new Activity("Spille kiks", 4, 35, 6900);
+        Reservation reservation = new Reservation(5,"07/10","11:15",customer,activity);
 
+        customerRepository.save(customer);
+        activityRepository.save(activity);
+        reservationRepository.save(reservation);
 
     }
 }
