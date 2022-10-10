@@ -2,8 +2,6 @@ package dat3.adventure.service;
 
 import dat3.adventure.dto.ReservationRequest;
 import dat3.adventure.dto.ReservationResponse;
-import dat3.adventure.entity.Activity;
-import dat3.adventure.entity.Customer;
 import dat3.adventure.entity.Reservation;
 import dat3.adventure.repository.ActivityRepository;
 import dat3.adventure.repository.CustomerRepository;
@@ -12,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,19 +40,20 @@ public class ReservationService {
 
     public ReservationResponse addReservation(ReservationRequest reservationRequest) {
 
-        //boolean exists = reservationRepository.existsByActivity_ActivityNameAndRentalDateAndTime(reservationRequest.getActivity().getActivityName(),reservationRequest.getRentalDate(), reservationRequest.getTime());
-
-        //if (exists) {
-        //    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Denne aktivitet er allerede booket på denne");
-        //}
-
-        if (reservationRepository.existsById(reservationRequest.getReservationId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Reservation with this ID already exists");
-        }
-
 
         Reservation newReservation = ReservationRequest.getReservationEntity(reservationRequest);
         newReservation = reservationRepository.save(newReservation);
+
+        if (reservationRepository.existsById(newReservation.getReservationId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Reservation with this ID already exists");
+        }
+        boolean exists = reservationRepository.existsByActivity_ActivityNameAndStartTimeBetween(newReservation.getActivity().getActivityName(),
+            newReservation.getStartTime(), newReservation.getEndTime());
+        boolean exists1 = reservationRepository.existsByActivity_ActivityNameAndEndTimeBetween(newReservation.getActivity().getActivityName(),
+            newReservation.getStartTime(), newReservation.getEndTime());
+        if (exists && exists1) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This activity has already been booked in this timeslot");
+        }
 
         return new ReservationResponse(newReservation);
     }
@@ -67,8 +65,7 @@ public class ReservationService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Can't change reservation");
         }*/
         reservation.setNumberOfParticipants(body.getNumberOfParticipants());
-        reservation.setRentalDate(body.getRentalDate());
-        reservation.setTime(body.getTime());
+        reservation.setStartTime(body.getStartTime());
         reservation.setCustomerId(body.getCustomerId());
         reservation.setActivity(body.getActivity());
     }

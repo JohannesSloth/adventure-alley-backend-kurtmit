@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +30,10 @@ public class Reservation {
   int numberOfParticipants;
 
   @Column(length= 50, nullable = false)
-  String rentalDate;
+  LocalDateTime startTime;
 
-  @Column(length= 50, nullable = false)
-  String time;
+  @Column(length= 50)
+  LocalDateTime endTime;
 
   @CreationTimestamp
   LocalDateTime created;
@@ -45,16 +46,31 @@ public class Reservation {
   @OneToOne
   Activity activity;
 
-  public Reservation(int numberOfParticipants, String rentalDate, String time) {
+  public Reservation(int numberOfParticipants, LocalDateTime startTime) {
     this.numberOfParticipants = numberOfParticipants;
-    this.rentalDate = rentalDate;
-    this.time = time;
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    String startTime1 = startTime.format(formatter);
+    this.startTime = LocalDateTime.parse(startTime1,formatter);
+
+
+    this.endTime = LocalDateTime.parse(this.startTime.getDayOfMonth() + "-" + this.startTime.getMonthValue() + "-" + this.startTime.getYear() +
+        " " + (this.startTime.getHour()+1) + ":" + this.startTime.getMinute(),formatter);
   }
 
-  public Reservation(int numberOfParticipants, String rentalDate, String time, int customerId, Activity activity) {
+  public Reservation(int numberOfParticipants, LocalDateTime startTime, int customerId, Activity activity) {
     this.numberOfParticipants = numberOfParticipants;
-    this.rentalDate = rentalDate;
-    this.time = time;
+    this.startTime = startTime;
+    this.customerId = customerId;
+    this.activity = activity;
+  }
+
+  public Reservation(int reservationId, int numberOfParticipants, LocalDateTime startTime, LocalDateTime created, LocalDateTime edited, int customerId, Activity activity) {
+    this.reservationId = reservationId;
+    this.numberOfParticipants = numberOfParticipants;
+    this.startTime = startTime;
+    this.created = created;
+    this.edited = edited;
     this.customerId = customerId;
     this.activity = activity;
   }

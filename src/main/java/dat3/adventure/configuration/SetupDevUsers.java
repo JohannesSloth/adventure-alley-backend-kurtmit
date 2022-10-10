@@ -14,6 +14,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 import dat3.security.repository.UserWithRolesRepository;
 
+import java.time.LocalDateTime;
+
 @Controller
 public class SetupDevUsers implements ApplicationRunner {
 
@@ -67,7 +69,7 @@ public class SetupDevUsers implements ApplicationRunner {
         customer = customerRepository.save(customer);
         Activity activity = new Activity("Spille kiks", 4, 35, 6900);
         activity = activityRepository.save(activity);
-        Reservation reservation = reservationRepository.save(new Reservation(5,"07/10","11:15",customer.getCustomerId(),activity));
+        Reservation reservation = reservationRepository.save(new Reservation(5, LocalDateTime.now(),customer.getCustomerId(),activity));
         reservation = reservationRepository.save(reservation);
 
         customerRepository.save(customer);
