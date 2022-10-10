@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +22,7 @@ public class ReservationResponse {
 
     int reservationId;
     int numberOfParticipants;
-    String rentalDate;
-    String time;
+    LocalDateTime startTime;
     int customerId;
     Activity activity;
 
@@ -37,8 +37,11 @@ public class ReservationResponse {
     public ReservationResponse(Reservation r) {
         this.reservationId = r.getReservationId();
         this.numberOfParticipants = r.getNumberOfParticipants();
-        this.rentalDate = r.getRentalDate();
-        this.time = r.getTime();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        String startTime1 = r.getStartTime().format(formatter);
+        this.startTime = LocalDateTime.parse(startTime1,formatter);
+
         this.customerId = r.getCustomerId();
         this.activity = r.getActivity();
     }
@@ -48,8 +51,11 @@ public class ReservationResponse {
     public ReservationResponse(Reservation r, boolean includeDate){
         this.reservationId = r.getReservationId();
         this.numberOfParticipants = r.getNumberOfParticipants();
-        this.rentalDate = r.getRentalDate();
-        this.time = r.getTime();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+
+        this.startTime = LocalDateTime.parse(r.getStartTime().format(formatter),formatter);
+
         this.activity = r.getActivity();
         this.customerId = getCustomerId();
         if(includeDate) {

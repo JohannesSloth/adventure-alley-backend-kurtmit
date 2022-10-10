@@ -13,6 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
@@ -26,8 +29,8 @@ public class ReservationServiceTest {
     public static void setupReservations(@Autowired ReservationRepository reservationRepository1){
         reservationRepository1.deleteAll();
         reservationRepository = reservationRepository1;
-        reservationRepository.save(new Reservation(5, "202020", "2000"));
-        reservationRepository.save(new Reservation(6,"303030","3000"));
+        reservationRepository.save(new Reservation(5, LocalDateTime.now()));
+        reservationRepository.save(new Reservation(6, LocalDateTime.now()));
     }
 
     @BeforeEach
@@ -47,16 +50,16 @@ public class ReservationServiceTest {
     @Test
     void editReservationTest(){
         //Change reservation
-        ReservationRequest request = new ReservationRequest(new Reservation(7,"909090", "1000"));
+        ReservationRequest request = new ReservationRequest(new Reservation(7, LocalDateTime.now()));
         reservationService.editReservation(request, 2);
         //Verify the changes
         ReservationResponse response = reservationService.findByReservationId(2);
         assertEquals(7, response.getNumberOfParticipants());
-        assertEquals("909090", response.getRentalDate());
-        assertEquals("1000", response.getTime());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        assertEquals(LocalDateTime.now().format(formatter), response.getStartTime().format(formatter));
+
         //assertEquals(5, response.getCustomerId());
-
-
     }
 
     @Test
