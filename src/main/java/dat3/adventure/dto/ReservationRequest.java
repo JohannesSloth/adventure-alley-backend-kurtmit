@@ -27,7 +27,7 @@ public class ReservationRequest {
     String date;
     String startTime;
     int customerId;
-    Activity activity;
+    String activityName;
 
     @CreationTimestamp
     LocalDateTime created;
@@ -39,7 +39,7 @@ public class ReservationRequest {
     public static Reservation getReservationEntity(ReservationRequest rrq) {
 
         return new Reservation(rrq.getReservationId(), rrq.getNumberOfParticipants(), rrq.getDate(), rrq.getStartTime(),
-            rrq.getCreated(), rrq.getEdited(),rrq.getCustomerId(),rrq.getActivity());
+            rrq.getCreated(), rrq.getEdited(),rrq.getCustomerId(),rrq.getActivityName());
     }
 
     public ReservationRequest (Reservation r) {
@@ -50,6 +50,6 @@ public class ReservationRequest {
         this.created = r.getCreated();
         this.edited = r.getEdited();
         this.customerId = r.getCustomerId();
-        this.activity = r.getActivity();
+        this.activityName = r.getActivityName();
     }
 }

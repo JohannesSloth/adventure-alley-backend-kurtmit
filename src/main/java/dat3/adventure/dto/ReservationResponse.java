@@ -25,7 +25,7 @@ public class ReservationResponse {
     String date;
     String startTime;
     int customerId;
-    Activity activity;
+    String activityName;
 
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
     LocalDateTime created;
@@ -41,7 +41,7 @@ public class ReservationResponse {
         this.date = r.getDate();
         this.startTime = r.getStartTime();
         this.customerId = r.getCustomerId();
-        this.activity = r.getActivity();
+        this.activityName = r.getActivityName();
     }
 
 
@@ -51,7 +51,7 @@ public class ReservationResponse {
         this.numberOfParticipants = r.getNumberOfParticipants();
         this.date = r.getDate();
         this.startTime = r.getStartTime();
-        this.activity = r.getActivity();
+        this.activityName = r.getActivityName();
         this.customerId = getCustomerId();
         if(includeDate) {
             this.created = r.getCreated();

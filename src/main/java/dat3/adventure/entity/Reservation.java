@@ -41,8 +41,7 @@ public class Reservation {
 
   int customerId;
 
-  @OneToOne
-  Activity activity;
+  String activityName;
 
   public Reservation(int numberOfParticipants, String date, String startTime) {
     this.numberOfParticipants = numberOfParticipants;
@@ -50,12 +49,12 @@ public class Reservation {
     this.startTime = startTime;
   }
 
-  public Reservation(int numberOfParticipants, String date, String startTime, int customerId, Activity activity) {
+  public Reservation(int numberOfParticipants, String date, String startTime, int customerId, String activityName) {
     this.numberOfParticipants = numberOfParticipants;
     this.date = date;
     this.startTime = startTime;
     this.customerId = customerId;
-    this.activity = activity;
+    this.activityName = activityName;
   }
 
 }
