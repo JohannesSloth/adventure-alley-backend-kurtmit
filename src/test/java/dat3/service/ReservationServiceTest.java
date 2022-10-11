@@ -29,8 +29,8 @@ public class ReservationServiceTest {
     public static void setupReservations(@Autowired ReservationRepository reservationRepository1){
         reservationRepository1.deleteAll();
         reservationRepository = reservationRepository1;
-        reservationRepository.save(new Reservation(5, LocalDateTime.now()));
-        reservationRepository.save(new Reservation(6, LocalDateTime.now()));
+        reservationRepository.save(new Reservation(5, "1010","2020"));
+        reservationRepository.save(new Reservation(6, "1010","2020"));
     }
 
     @BeforeEach
@@ -50,14 +50,11 @@ public class ReservationServiceTest {
     @Test
     void editReservationTest(){
         //Change reservation
-        ReservationRequest request = new ReservationRequest(new Reservation(7, LocalDateTime.now()));
+        ReservationRequest request = new ReservationRequest(new Reservation(7, "1010","2020"));
         reservationService.editReservation(request, 2);
         //Verify the changes
         ReservationResponse response = reservationService.findByReservationId(2);
         assertEquals(7, response.getNumberOfParticipants());
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-        assertEquals(LocalDateTime.now().format(formatter), response.getStartTime().format(formatter));
 
         //assertEquals(5, response.getCustomerId());
     }

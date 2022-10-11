@@ -22,7 +22,8 @@ public class ReservationResponse {
 
     int reservationId;
     int numberOfParticipants;
-    LocalDateTime startTime;
+    String date;
+    String startTime;
     int customerId;
     Activity activity;
 
@@ -37,11 +38,8 @@ public class ReservationResponse {
     public ReservationResponse(Reservation r) {
         this.reservationId = r.getReservationId();
         this.numberOfParticipants = r.getNumberOfParticipants();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        String startTime1 = r.getStartTime().format(formatter);
-        this.startTime = LocalDateTime.parse(startTime1,formatter);
-
+        this.date = r.getDate();
+        this.startTime = r.getStartTime();
         this.customerId = r.getCustomerId();
         this.activity = r.getActivity();
     }
@@ -51,11 +49,8 @@ public class ReservationResponse {
     public ReservationResponse(Reservation r, boolean includeDate){
         this.reservationId = r.getReservationId();
         this.numberOfParticipants = r.getNumberOfParticipants();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
-
-        this.startTime = LocalDateTime.parse(r.getStartTime().format(formatter),formatter);
-
+        this.date = r.getDate();
+        this.startTime = r.getStartTime();
         this.activity = r.getActivity();
         this.customerId = getCustomerId();
         if(includeDate) {

@@ -24,8 +24,8 @@ public class ReservationRequest {
 
     int reservationId;
     int numberOfParticipants;
-
-    LocalDateTime startTime;
+    String date;
+    String startTime;
     int customerId;
     Activity activity;
 
@@ -38,22 +38,15 @@ public class ReservationRequest {
 
     public static Reservation getReservationEntity(ReservationRequest rrq) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        String startTime1 = rrq.getStartTime().format(formatter);
-        LocalDateTime startTime = LocalDateTime.parse(startTime1,formatter);
-
-        return new Reservation(rrq.getReservationId(), rrq.getNumberOfParticipants(), startTime,
+        return new Reservation(rrq.getReservationId(), rrq.getNumberOfParticipants(), rrq.getDate(), rrq.getStartTime(),
             rrq.getCreated(), rrq.getEdited(),rrq.getCustomerId(),rrq.getActivity());
     }
 
     public ReservationRequest (Reservation r) {
         this.reservationId = r.getReservationId();
         this.numberOfParticipants = r.getNumberOfParticipants();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        String startTime1 = r.getStartTime().format(formatter);
-        this.startTime = LocalDateTime.parse(startTime1,formatter);
-
+        this.date = r.getDate();
+        this.startTime = r.getStartTime();
         this.created = r.getCreated();
         this.edited = r.getEdited();
         this.customerId = r.getCustomerId();
