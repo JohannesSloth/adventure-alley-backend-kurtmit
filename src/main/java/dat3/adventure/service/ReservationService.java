@@ -27,7 +27,7 @@ public class ReservationService {
     }
 
     public List<ReservationResponse> getReservationsByActivityAndDate(String activity,String date){
-        List<Reservation> reservations = reservationRepository.findAllByActivityNameAndDate(activity,date);
+        List<Reservation> reservations = reservationRepository.findByActivityNameAndDate(activity,date);
         List<ReservationResponse> response = reservations.stream().map(reservation -> new ReservationResponse(reservation)).collect(Collectors.toList());
        return response;
     }

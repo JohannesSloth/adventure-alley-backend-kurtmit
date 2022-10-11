@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 
-  List<Reservation> findAllByActivityNameAndDate (String activityName, String date);
+  List<Reservation> findByActivityNameAndDate (String activityName, String date);
 
 }
 
