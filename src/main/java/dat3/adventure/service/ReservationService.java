@@ -27,7 +27,7 @@ public class ReservationService {
     }
 
     public List<ReservationResponse> getReservationsByActivityAndDate(String activity,String date){
-        List<Reservation> reservations = reservationRepository.findAllByActivity_ActivityNameAndDate(activity,date);
+        List<Reservation> reservations = reservationRepository.findAllByActivityNameAndDate(activity,date);
         List<ReservationResponse> response = reservations.stream().map(reservation -> new ReservationResponse(reservation)).collect(Collectors.toList());
        return response;
     }
@@ -73,7 +73,7 @@ public class ReservationService {
         reservation.setStartTime(body.getStartTime());
         reservation.setDate(body.getDate());
         reservation.setCustomerId(body.getCustomerId());
-        reservation.setActivity(body.getActivity());
+        reservation.setActivityName(body.getActivityName());
     }
 
     public void deleteReservationById(int reservationId) {

@@ -67,13 +67,34 @@ public class SetupDevUsers implements ApplicationRunner {
 
         Customer customer = new Customer("Smørgen", "Smørgen@yahoo.dk", "88888888", "Leasy", "876865");
         customer = customerRepository.save(customer);
-        Activity activity = new Activity("Spille kiks", 4, 35, 6900);
-        activity = activityRepository.save(activity);
-        Reservation reservation = reservationRepository.save(new Reservation(5, "2020","20",customer.getCustomerId(),activity));
-        reservation = reservationRepository.save(reservation);
+
+        Activity activity1 = new Activity("sumo", 15, 140, 200);
+        activity1 = activityRepository.save(activity1);
+        Activity activity2 = new Activity("gokart", 16, 135, 300);
+        activity2 = activityRepository.save(activity2);
+        Activity activity3 = new Activity("minigolf", 7, 80, 100);
+        activity3 = activityRepository.save(activity3);
+        Activity activity4 = new Activity("paintball", 18, 145, 400);
+        activity4 = activityRepository.save(activity4);
+
+        Reservation reservation1 = reservationRepository.save(new Reservation(1, "10102022","09",customer.getCustomerId(),activity1.getActivityName()));
+        reservation1 = reservationRepository.save(reservation1);
+        Reservation reservation2 = reservationRepository.save(new Reservation(2, "11102022","11",customer.getCustomerId(),activity1.getActivityName()));
+        reservation2 = reservationRepository.save(reservation2);
+        Reservation reservation3 = reservationRepository.save(new Reservation(3, "12102022","12",customer.getCustomerId(),activity1.getActivityName()));
+        reservation3 = reservationRepository.save(reservation3);
+        Reservation reservation4 = reservationRepository.save(new Reservation(4, "13102022","16",customer.getCustomerId(),activity1.getActivityName()));
+        reservation4 = reservationRepository.save(reservation4);
+
 
         customerRepository.save(customer);
-        activityRepository.save(activity);
-        reservationRepository.save(reservation);
+        activityRepository.save(activity1);
+        activityRepository.save(activity2);
+        activityRepository.save(activity3);
+        activityRepository.save(activity4);
+        reservationRepository.save(reservation1);
+        reservationRepository.save(reservation2);
+        reservationRepository.save(reservation3);
+        reservationRepository.save(reservation4);
     }
 }
