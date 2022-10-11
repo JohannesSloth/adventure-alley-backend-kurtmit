@@ -26,6 +26,12 @@ public class ReservationService {
         this.reservationRepository = reservationRepository;
     }
 
+    public List<ReservationResponse> getReservationsByActivityAndDate(String activity,String date){
+        List<Reservation> reservations = reservationRepository.findAllByActivity_ActivityNameAndDate(activity,date);
+        List<ReservationResponse> response = reservations.stream().map(reservation -> new ReservationResponse(reservation)).collect(Collectors.toList());
+       return response;
+    }
+
     public List<ReservationResponse> getReservations() {
         List<Reservation> reservations = reservationRepository.findAll();
         List<ReservationResponse> response = reservations.stream().map(reservation -> new ReservationResponse(reservation)).collect(Collectors.toList());
@@ -47,13 +53,12 @@ public class ReservationService {
         if (reservationRepository.existsById(newReservation.getReservationId())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Reservation with this ID already exists");
         }
-        boolean exists = reservationRepository.existsByActivity_ActivityNameAndStartTimeBetween(newReservation.getActivity().getActivityName(),
-            newReservation.getStartTime(), newReservation.getEndTime());
-        boolean exists1 = reservationRepository.existsByActivity_ActivityNameAndEndTimeBetween(newReservation.getActivity().getActivityName(),
-            newReservation.getStartTime(), newReservation.getEndTime());
-        if (exists && exists1) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This activity has already been booked in this timeslot");
-        }
+        //boolean exists = (reservationRepository.existsByActivity_ActivityNameAndStartTimeBetween(newReservation.getActivity().getActivityName(),
+        //    newReservation.getStartTime(), newReservation.getEndTime()) && reservationRepository.existsByActivity_ActivityNameAndEndTimeBetween(newReservation.getActivity().getActivityName(),
+        //    newReservation.getStartTime(), newReservation.getEndTime()));
+        //if (exists) {
+        //    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This activity has already been booked in this timeslot");
+        //}
 
         return new ReservationResponse(newReservation);
     }
@@ -66,6 +71,7 @@ public class ReservationService {
         }*/
         reservation.setNumberOfParticipants(body.getNumberOfParticipants());
         reservation.setStartTime(body.getStartTime());
+        reservation.setDate(body.getDate());
         reservation.setCustomerId(body.getCustomerId());
         reservation.setActivity(body.getActivity());
     }

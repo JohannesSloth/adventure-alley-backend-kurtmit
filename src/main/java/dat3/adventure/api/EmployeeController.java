@@ -43,7 +43,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{employeeId}")
-    public EmployeeResponse getEmployeeById(@PathVariable int employeeId) throws Exception {
+    public EmployeeResponse getEmployeeById(@PathVariable int employeeId) {
         EmployeeResponse response = employeeService.findByEmployeeId(employeeId);
         return response;
     }
