@@ -19,6 +19,7 @@ public class EmployeeResponse {
     String employeeName;
     String role;
     String username;
+    String password;
 
     /*@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss", shape = JsonFormat.Shape.STRING)
     LocalDateTime created;
@@ -31,7 +32,7 @@ public class EmployeeResponse {
         this.employeeName = e.getEmployeeName();
         this.role = e.getRole();
         this.username = e.getUsername();
-
+        this.password = e.getPassword();
     }
 
 
