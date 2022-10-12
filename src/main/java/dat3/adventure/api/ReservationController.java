@@ -19,7 +19,7 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    @GetMapping("/{activity}/date")
+    @GetMapping("/{activity}/{date}")
     public List<ReservationResponse> getReservationsByActivityAndDate(@PathVariable String activity, @PathVariable String date){
         return reservationService.getReservationsByActivityAndDate(activity,date);
     }
