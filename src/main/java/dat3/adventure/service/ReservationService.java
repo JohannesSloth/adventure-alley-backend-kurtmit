@@ -26,8 +26,8 @@ public class ReservationService {
         this.reservationRepository = reservationRepository;
     }
 
-    public List<ReservationResponse> getReservationsByActivityAndDate(String activity){
-        List<Reservation> reservations = reservationRepository.getReservationsByActivityName(activity);
+    public List<ReservationResponse> getReservationsByActivityAndDate(String activity, String date){
+        List<Reservation> reservations = reservationRepository.getReservationsByActivityNameAndDate(activity,date);
         List<ReservationResponse> response = reservations.stream().map(reservation -> new ReservationResponse(reservation)).collect(Collectors.toList());
        return response;
     }
