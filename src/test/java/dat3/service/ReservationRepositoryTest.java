@@ -33,7 +33,7 @@ public class ReservationRepositoryTest {
 
   @Test
   public void testFindRes(){
-    assertEquals(reservationRepository.getReservationsByActivityNameAndDate("sumo","10102022").size(), 2);
+    assertEquals(reservationRepository.getReservationsByActivityNameAndDate("sumo","10102022").size(), 1);
   }
 
 }

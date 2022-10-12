@@ -2,6 +2,7 @@ package dat3.adventure.configuration;
 
 import dat3.adventure.entity.Activity;
 import dat3.adventure.entity.Customer;
+import dat3.adventure.entity.Employee;
 import dat3.adventure.entity.Reservation;
 import dat3.adventure.repository.ActivityRepository;
 import dat3.adventure.repository.CustomerRepository;
@@ -63,7 +64,8 @@ public class SetupDevUsers implements ApplicationRunner {
         userWithRolesRepository.save(user2);
         userWithRolesRepository.save(user3);
 
-
+        Employee employee1 = new Employee("Jürgen", "Medarbejder", "j", "j");
+        employeeRepository.save(employee1);
 
         Customer customer = new Customer("Smørgen", "Smørgen@yahoo.dk", "88888888", "Leasy", "876865");
         customer = customerRepository.save(customer);
