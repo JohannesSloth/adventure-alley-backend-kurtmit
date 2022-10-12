@@ -19,9 +19,9 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    @GetMapping("/{activity}/{date}")
+    @GetMapping("/{activity}")
     public List<ReservationResponse> getReservationsByActivityAndDate(String activity, String date){
-        return reservationService.getReservationsByActivityAndDate(activity,date);
+        return reservationService.getReservationsByActivityAndDate(activity);
     }
 
     @GetMapping
