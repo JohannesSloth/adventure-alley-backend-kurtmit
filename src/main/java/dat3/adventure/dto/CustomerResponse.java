@@ -24,7 +24,7 @@ public class CustomerResponse {
     this.customerId = c.getCustomerId();
     this.customerName = c.getCustomerName();
     this.customerEmail = c.getCustomerEmail();
-    this.phoneNumber = c.getCompanyName();
+    this.phoneNumber = c.getPhoneNumber();
     if (isCompany) {
       this.companyName = c.getCompanyName();
       this.cvrNumber = c.getCvrNumber();

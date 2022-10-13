@@ -53,7 +53,7 @@ public class CustomerService {
         List<CustomerResponse> response = customers.stream().map(customer -> {
             if (customerRepository.findById(customer.getCustomerId()).
                     orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                            "Kan ikke finde kunde med dette ID")).getCvrNumber() == null) {
+                            "Kan ikke finde kunde med dette ID")).getCompanyName().equalsIgnoreCase("")) {
                 return new CustomerResponse(customer, false);
             } else {
                 return new CustomerResponse(customer, true);
