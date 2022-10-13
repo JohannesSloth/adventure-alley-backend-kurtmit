@@ -24,7 +24,7 @@ public class ReservationResponse {
     int numberOfParticipants;
     String date;
     String startTime;
-    int customerId;
+    String customerEmail;
     String activityName;
 
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
@@ -40,7 +40,7 @@ public class ReservationResponse {
         this.numberOfParticipants = r.getNumberOfParticipants();
         this.date = r.getDate();
         this.startTime = r.getStartTime();
-        this.customerId = r.getCustomerId();
+        this.customerEmail = r.getCustomerEmail();
         this.activityName = r.getActivityName();
     }
 
@@ -52,7 +52,7 @@ public class ReservationResponse {
         this.date = r.getDate();
         this.startTime = r.getStartTime();
         this.activityName = r.getActivityName();
-        this.customerId = getCustomerId();
+        this.customerEmail = r.getCustomerEmail();
         if(includeDate) {
             this.created = r.getCreated();
             this.edited = r.getEdited();

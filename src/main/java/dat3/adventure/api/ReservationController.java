@@ -40,6 +40,11 @@ public class ReservationController {
         return reservationService.addReservation(body);
     }
 
+    @GetMapping
+    public List<ReservationResponse> getReservationsByCustomerEmail(@PathVariable String customerEmail) {
+        return reservationService.getReservationsByCustomerEmail(customerEmail);
+    }
+
     @PutMapping("/{reservationId}")
     public ResponseEntity<Boolean> editReservation(@RequestBody ReservationRequest body, @PathVariable int reservationId){
         reservationService.editReservation(body,reservationId);

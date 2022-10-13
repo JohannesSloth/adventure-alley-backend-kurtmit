@@ -79,13 +79,13 @@ public class SetupDevUsers implements ApplicationRunner {
         Activity activity4 = new Activity("paintball", 18, 145, 400);
         activity4 = activityRepository.save(activity4);
 
-        Reservation reservation1 = reservationRepository.save(new Reservation(1, "10102022","09",customer.getCustomerId(),activity1.getActivityName()));
+        Reservation reservation1 = reservationRepository.save(new Reservation(1, "10102022","10",customer.getCustomerEmail(),activity1.getActivityName()));
         reservation1 = reservationRepository.save(reservation1);
-        Reservation reservation2 = reservationRepository.save(new Reservation(2, "11102022","11",customer.getCustomerId(),activity1.getActivityName()));
+        Reservation reservation2 = reservationRepository.save(new Reservation(2, "11102022","11",customer.getCustomerEmail(),activity2.getActivityName()));
         reservation2 = reservationRepository.save(reservation2);
-        Reservation reservation3 = reservationRepository.save(new Reservation(3, "12102022","12",customer.getCustomerId(),activity1.getActivityName()));
+        Reservation reservation3 = reservationRepository.save(new Reservation(3, "12102022","12",customer.getCustomerEmail(),activity3.getActivityName()));
         reservation3 = reservationRepository.save(reservation3);
-        Reservation reservation4 = reservationRepository.save(new Reservation(4, "13102022","16",customer.getCustomerId(),activity1.getActivityName()));
+        Reservation reservation4 = reservationRepository.save(new Reservation(4, "13102022","16",customer.getCustomerEmail(),activity4.getActivityName()));
         reservation4 = reservationRepository.save(reservation4);
 
 

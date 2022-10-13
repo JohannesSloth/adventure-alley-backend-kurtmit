@@ -25,6 +25,7 @@ public class CustomerService {
         }
         Customer newCustomer = CustomerRequest.getCustomerEntity(customerRequest);
         customerRepository.save(newCustomer);
+
         if (newCustomer.getCustomerName().equalsIgnoreCase("null") || newCustomer.getCvrNumber() == null) {
             return new CustomerResponse(newCustomer, false);
         } else {

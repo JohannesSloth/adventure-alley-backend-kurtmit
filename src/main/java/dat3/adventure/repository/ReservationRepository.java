@@ -10,4 +10,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 
   List<Reservation> getReservationsByActivityNameAndDate (String activityName, String date);
 
+  List<Reservation> getReservationByCustomerEmail (String customerEmail);
+
 }

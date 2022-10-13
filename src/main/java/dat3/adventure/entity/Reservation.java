@@ -39,7 +39,7 @@ public class Reservation {
   @UpdateTimestamp
   LocalDateTime edited;
 
-  int customerId;
+  String customerEmail;
 
   String activityName;
 
@@ -49,11 +49,11 @@ public class Reservation {
     this.startTime = startTime;
   }
 
-  public Reservation(int numberOfParticipants, String date, String startTime, int customerId, String activityName) {
+  public Reservation(int numberOfParticipants, String date, String startTime, String customerEmail, String activityName) {
     this.numberOfParticipants = numberOfParticipants;
     this.date = date;
     this.startTime = startTime;
-    this.customerId = customerId;
+    this.customerEmail = customerEmail;
     this.activityName = activityName;
   }
 
