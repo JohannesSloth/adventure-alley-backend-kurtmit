@@ -40,7 +40,7 @@ public class ReservationController {
         return reservationService.addReservation(body);
     }
 
-    @GetMapping
+    @GetMapping("/{customerEmail}")
     public List<ReservationResponse> getReservationsByCustomerEmail(@PathVariable String customerEmail) {
         return reservationService.getReservationsByCustomerEmail(customerEmail);
     }
