@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,7 +27,7 @@ public class CustomerService {
         Customer newCustomer = CustomerRequest.getCustomerEntity(customerRequest);
         customerRepository.save(newCustomer);
 
-        if (newCustomer.getCustomerName().equalsIgnoreCase("null") || newCustomer.getCvrNumber() == null) {
+        if (newCustomer.getCustomerName().equalsIgnoreCase("") || Objects.equals(newCustomer.getCvrNumber(), "")) {
             return new CustomerResponse(newCustomer, false);
         } else {
             return new CustomerResponse(newCustomer, true);
